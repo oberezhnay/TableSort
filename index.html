@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<!-- jhk -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+        th.desc:after {
+            position: absolute;
+            left: 80%;
+            top: 50%;
+            content: "▼";
+            font-size: 14px;
+        }
+
+        th.asc:after {
+            content: "▲";
+            font-size: 14px;
+            position: absolute;
+            left: 80%;
+            top: 50%;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="back">Back</div>
+    <div class="back">Back </div>
     <div class="go">Go</div>
     <script>
         let data = [{

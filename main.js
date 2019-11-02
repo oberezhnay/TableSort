@@ -6,7 +6,10 @@ $.each(data[0], function (key, value) {
         th = $(`<th>`);
         th.append(`<th>${key}</th>`).css({
             'border': '1px solid black',
-            'background-color': 'rgba(0,0,0, 0.1)'
+            'font-size': '22px',
+            'background-color': 'rgba(0,0,0, 0.1)',
+            'position': 'relative',
+            'min-width': '55px'
         });
     }
     table.append(th);
@@ -26,11 +29,16 @@ $.each(data, function (key, elem) {
 });
 $('body').append(table);
 
-/*****sortirovka****/
+
 $('th').click(function () {
-    let rows = table.find('tr').toArray().sort(sortRows($(this).index()))
+    $('th').not($(this)).removeClass();
+    $(this).removeClass('desc');
+    $(this).addClass('asc');
+    let rows = table.find('tr').toArray().sort(sortRows($(this).index()));
     this.asc = !this.asc
     if (!this.asc) {
+        $(this).removeClass('asc');
+        $(this).addClass('desc');
         rows = rows.reverse()
     }
     for (let i = 0; i < rows.length; i += 1) {
@@ -58,6 +66,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('click', function (event) {
     if (event.target.tagName == 'TH') {
-        history.pushState({}, 'title', `sortBy=${event.target.textContent}`);
+        let initUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        let sortUrl = initUrl + `?sortBy=${event.target.textContent}`;
+        history.pushState(null, null, sortUrl);
+        event.preventDefault();
     }
 });
